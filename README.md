@@ -41,7 +41,7 @@ PN532 supports detecting two cards at once, but if you ask it to detect two card
 
 The workflow for detecting ISO14443-A cards, one at a time:
 * Send command SAMConfiguration (0x14) with parameters "Normal Mode" (0x01), "No Timeout" (0x00) and "IRQ" enabled (0x01). (Our code does not use interrupt handlers, but enabling IRQ does no harm...)
-* Send command RFConfiguration (0x32) with parameters "RF field" (0x01) set to 0x01 (bit1 "Auto RFCA" Off and bit0 "RF" On). This makes PN532 enable RF field immediately and without caring about othe rexternal fields.
+* Send command RFConfiguration (0x32) with parameters "RF field" (0x01) set to 0x01 (bit1 "Auto RFCA" Off and bit0 "RF" On). This makes PN532 enable RF field immediately and without caring about other external fields.
 * Send command InListPassiveTarget (0x4A) with parameters "Max Targets" set to 0x01 (only detect one card) and "BaudRate Type" set to 0x00 (detect ISO14443-A cards). In the response to this command, the first Data byte is number of targets found. If this is 0x01, a card is detected and we parse the ID out from the preceding TargetData
 
 # Notes on implementation
